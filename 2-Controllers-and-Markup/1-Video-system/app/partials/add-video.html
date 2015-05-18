@@ -1,0 +1,48 @@
+<div>
+    <form name="form" novalidate class="css-form">
+        <label>*Title </label>
+        <input type="text" name="title" ng-model="video.title" required=""/>
+
+        <div ng-show="form.$submitted || form.title.$touched">
+            <div ng-show="form.title.$error.required">Enter the movie title.</div>
+        </div>
+
+        <label>*Picture </label>
+        <input type="text" name="picture" ng-model="video.picture" required/>
+
+        <div ng-show="form.$submitted || form.picture.$touched">
+            <span ng-show="form.picture.$error.required">Enter the picture path</span>
+        </div>
+
+        <label>*Length: </label>
+        <input type="time" name="length" ng-model="video.length" required/>
+
+        <div ng-show="form.$submitted || form.length.$touched">
+            <span ng-show="form.length.$error.required">Enter the movie length</span>
+        </div>
+
+        <label>*Release date: </label>
+        <input type="date" name="date" ng-model="video.date" required/>
+
+        <div ng-show="form.$submitted || form.date.$touched">
+            <span ng-show="form.date.$error.required">Enter the release date</span>
+        </div>
+
+        <label>*Category</label>
+        <input type="text" name="category" ng-model="video.category" required>
+
+        <div ng-show="form.$submitted || form.category.$touched">
+            <span ng-show="form.category.$error.required">Enter the category</span>
+        </div>
+
+        <fieldset>
+            <legend>*Have subtitles?</legend>
+            <div ng-init="haveSubtitles=0">
+                Yes<input type="radio" name="haveSubtitles" value="1" ng-model="haveSubtitles"/>
+                No<input type="radio" name="haveSubtitles" value="0" ng-model="haveSubtitles"/>
+            </div>
+        </fieldset>
+
+        <button class="submit" ng-disabled="form.$invalid" ng-click="addVideo(video)">Add to movies list</button>
+    </form>
+</div>

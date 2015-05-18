@@ -1,0 +1,48 @@
+#fixed-menu {
+    position: fixed;
+    width: 100%;
+    height: 75px;
+    padding: 10px;
+}
+
+.spacer {
+    width: 100%;
+    height: 95px;
+}
+
+.content {
+    width: 100%;
+    height: 600px;
+    padding: 10px;
+}
+
+li {
+    list-style: none;
+}
+
+.movie-content {
+    display: inline-block;
+}
+
+.submit {
+    cursor: pointer;
+    border: 1px black solid;
+}
+
+form>label, form>input {
+    display: block;
+}
+form>div {
+    display: inline-block;
+}
+form>fieldset{
+    display: inline-block;
+}
+
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+}

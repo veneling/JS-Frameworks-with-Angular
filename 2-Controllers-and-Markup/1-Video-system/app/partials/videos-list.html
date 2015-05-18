@@ -1,0 +1,45 @@
+<div id="content">
+    <span>Sort videos by</span>
+    <select ng-model="orderProp">
+        <option value="title">Title</option>
+        <option value="length">Length</option>
+        <option value="date">Release date</option>
+    </select>
+    <br>
+    Search videos <input type="text" placeholder="Search" ng-model="query">
+    <br>
+    <span>Filter videos by title</span>
+    <select ng-model="filterBy.title">
+        <option></option>
+        <option ng-repeat="video in videos" value="{{video.title}}">{{video.title}}</option>
+    </select>
+    <br>
+    <span>Filter videos by date</span>
+    <select ng-model="filterBy.date">
+        <option></option>
+        <option ng-repeat="video in videos" value="{{video.date}}">{{video.date | date:'dd.MM.yyyy'}}</option>
+    </select>
+    <br>
+    <span>Filter videos by subtitles availability</span>
+    <select ng-model="filterBy.haveSubtitles">
+        <option></option>
+        <option ng-repeat="video in videos | subtitles:'haveSubtitles'" value="{{video.haveSubtitles}}">
+            {{video.haveSubtitles}}
+        </option>
+
+    </select>
+    <br>
+    <ul>
+        <li ng-repeat="video in videos | filter:filterBy | orderBy:orderProp">
+            <img ng-src="img/{{video.picture}}" alt="{{video.title}}">
+
+            <div class="movie-content">
+                <h3>{{video.title}}</h3>
+                <span>Length: {{video.length | date:'h:m'}}</span>
+                <span>Genre: {{video.category}}</span>
+
+                <p>Release date: {{video.date | date: 'dd.MM.yyyy'}}</p>
+            </div>
+        </li>
+    </ul>
+</div>
