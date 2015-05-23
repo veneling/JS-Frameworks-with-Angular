@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="AuthController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="">
+            </a>
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="">Home</a></li>
+                <li><a href="">Messages</a></li>
+                <li><a href="">Friend requests</a></li>
+                <li><a href="#/user/edit-profile">Edit Profile</a></li>
+                <li><a href="">Change password</a></li>
+                <li><a href="#/logout" ng-click="logout()">Logout</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+

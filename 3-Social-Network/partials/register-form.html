@@ -1,5 +1,5 @@
 <div class="row">
-    <form class="register form-horizontal col-lg-12" name="registerForm">
+    <form class="register form-horizontal col-lg-12" name="registerForm" ng-controller="AuthController">
         <fieldset>
             <legend><h2>Create a new account</h2></legend>
             <div class="col-lg-9 form-info">
@@ -86,7 +86,7 @@
             <div class="form-group col-lg-12">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="button" id="register-button" ng-disabled="registerForm.$invalid"
-                            class="btn btn-lg btn-primary" ng-click="submit(user)">Register</button>
+                            class="btn btn-lg btn-primary" ng-click="register(user)">Register</button>
                     <span>or</span>
                     <a href="#/login">Login</a>
                 </div>

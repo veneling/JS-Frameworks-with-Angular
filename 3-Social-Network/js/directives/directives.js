@@ -1,6 +1,4 @@
-var directives = angular.module('directives', ['socialNetwork']);
-
-directives.directive('passwordMatch', [function () {
+socialNetwork.directive('passwordMatch', [function () {
     return {
         restrict: 'A',
         scope: true,
