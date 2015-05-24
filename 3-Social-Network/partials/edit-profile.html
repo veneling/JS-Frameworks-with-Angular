@@ -41,7 +41,8 @@
 
                 <div class="col-lg-4 picture-upload">
                     <div class="form-group">
-                        <img class="thumbnail picture-preview" src="{{userData.coverImageData}}" id="background-image-thumbnail"
+                        <img class="thumbnail picture-preview" src="{{userData.coverImageData}}"
+                             id="background-image-thumbnail"
                              resizer="400,150"/>
                     </div>
                     <div class="form-group">
@@ -50,7 +51,6 @@
                                    id="coverImage"
                                    name="coverImage"
                                    type="file"
-                                   ng-model="userData.coverImageData"
                                    base-sixty-four-input
                                    picture-checker="background-image-thumbnail">
                         </label>
@@ -60,20 +60,20 @@
 
             <div class="col-lg-4 picture-upload">
                 <div class="form-group">
-                    <img class="thumbnail picture-preview" src="{{userData.profileImageData}}" id="profile-image-thumbnail"
-                          resizer="200,200"/>
+                    <img class="thumbnail picture-preview" src="{{userData.profileImageData}}"
+                         id="profile-image-thumbnail"
+                         resizer="200,200"/>
                 </div>
                 <div class="row">
                     <label class="btn btn-primary" for="profile-image">
                         Change profile image
+
+                        <input class="file-button"
+                               id="profile-image"
+                               type="file"
+                               base-sixty-four-input
+                               picture-checker="profile-image-thumbnail">
                     </label>
-                    <input class="file-button"
-                           id="profile-image"
-                           type="file"
-                           ng-model="userData.profileImageData"
-                           base-sixty-four-input
-                           picture-checker="profile-image-thumbnail"
-                            />
                 </div>
             </div>
 

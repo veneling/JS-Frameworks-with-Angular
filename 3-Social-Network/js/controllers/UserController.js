@@ -10,7 +10,11 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
                 $scope.userData.gender = 1;
             },
             function (error) {
-                notify({message: 'Unable to get current user data'})
+                notify({
+                    message: 'Unable to get current user data',
+                    duration: 5000,
+                    position: 'center'
+                })
             }
         );
     }
@@ -26,37 +30,40 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
         }
     }
 
-    $scope.avatarChanged = function (element) {
-        convertImage(element.files[0], 'profile', 128);
-    };
+    $scope.editProfile = function (userData) {
+        var data = {};
+        data.name = userData.name;
+        data.email = userData.email;
+        data.profileImageData = userData.profileImageData.base64;
+        data.coverImageData = userData.coverImageData.base64;
+        data.gender = userData.gender;
 
-    $scope.backgroundChanged = function (element) {
-        convertImage(element.files[0], 'background', 1024);
-    };
-
-    var convertImage = function (file, imageType, sizeLimit) {
-        var sizeCheck = file.size / 1024 <= sizeLimit;
-        var typeCheck = file.type.match(/image\/.*/);
-
-        console.log(sizeCheck + ' ' + typeCheck);
-        if (typeCheck != null && sizeCheck) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                if (imageType == 'profile') {
-                    console.log(reader.result);
-                    $scope.userData.profileImageData = reader.result;
-                } else {
-                    $scope.userData.coverImageData = reader.result;
-                }
-            };
-            reader.readAsDataURL(file);
-        } else {
-            notify({
-                message: 'File type not supported!',
-                duration: 5000,
-                position: 'center'
-            });
+        if (data.profileImageData == undefined) {
+            data.profileImageData = userData.profileImageData;
         }
+
+        if (data.coverImageData == undefined) {
+            data.coverImageData = userData.coverImageData;
+        }
+
+        userServices.EditProfile(data)
+            .then(
+            function success() {
+                $location.path('#/user/home');
+                notify({
+                    message: 'Your profile was successfully updated',
+                    duration: 5000,
+                    position: 'center'
+                })
+            },
+            function error(error) {
+                notify({
+                    message: 'Error during profile update',
+                    duration: 5000,
+                    position: 'center'
+                })
+            }
+        );
     };
 
 });

@@ -48,6 +48,7 @@ socialNetwork.directive('resizer', [function () {
 socialNetwork.directive('pictureChecker', [function () {
     return {
         restrict: 'A',
+        controller : 'NotiController',
         link: function (scope, element, attrs, control) {
 
             var imageType = attrs.pictureChecker.indexOf('profile') != -1;
@@ -63,17 +64,27 @@ socialNetwork.directive('pictureChecker', [function () {
                 if (typeCheck != null && sizeCheck) {
                     var reader = new FileReader();
                     reader.onload = function () {
-                        if (imageType == 'profile') {
-                            $('#profile-image-thumbnail').attr('src', reader.result);
+                        if (imageType) {
                             scope.userData.profileImageData = reader.result;
                         } else {
-                            $('#background-image-thumbnail').attr('src', reader.result);
                             scope.userData.coverImageData = reader.result;
                         }
+                        $('#' + attrs.pictureChecker).attr('src', reader.result);
                     };
                     reader.readAsDataURL(file);
                 } else {
-                    
+                    var message;
+                    if(!sizeCheck) {
+                        message = 'File should be up to ' + sizeLimit + 'KB. ';
+                    }
+                    if(!typeCheck) {
+                        message = 'The file should be valid picture format (.jpg, .png...)';
+                    }
+                    scope.note({
+                        message: message,
+                        duration: 5000,
+                        position: 'center'
+                    });
                 }
             });
         }
