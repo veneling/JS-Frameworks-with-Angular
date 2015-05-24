@@ -1,77 +1,89 @@
 <div ng-include="'partials/user-header.html'"></div>
 
-<section class="edit-profile">
-    <form class="register form-horizontal">
+<div class="row">
+    <form class="register form-horizontal col-lg-12" name="editUserProfileForm" ng-controller="UserController">
         <fieldset>
-            <legend>Edit Profile</legend>
-            <div class="col-lg-9 form-info">
-                <div class="form-group">
-                    <label for="username" class="col-lg-3 control-label">Username:</label>
+            <legend><h2>Edit Profile</h2></legend>
 
-                    <div class="col-lg-9">
-                        <input type="text" class="form-control" id="username" value="Username" disabled>
+            <div class="col-lg-5 form-info">
+                <div class="form-group">
+                    <label for="name" class="col-lg-2 control-label">Name:</label>
+
+                    <div class="col-lg-4">
+                        <input type="text" ng-model="userData.name" class="form-control" id="name" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-lg-3 control-label">Password:</label>
+                    <label for="inputEmail" class="col-lg-2 control-label">Email:</label>
 
-                    <div class="col-lg-9">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    <div class="col-lg-4">
+                        <input type="email" class="form-control" ng-model="userData.email" id="inputEmail"
+                               placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-lg-3 control-label">Name:</label>
+                    <label class="col-lg-2 control-label">Gender</label>
 
-                    <div class="col-lg-9">
-                        <input type="text" class="form-control" id="name" placeholder="Name" value="Full name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="about" class="col-lg-3 control-label">About me:</label>
-
-                    <div class="col-lg-9">
-                        <textarea class="form-control" rows="3" id="about">about me</textarea>
-                        <span class="help-block">Tell us a little about yourself!</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Gender:</label>
-
-                    <div class="col-lg-9">
+                    <div class="col-lg-4">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gender-radio" value="male">Male
+                                <input type="radio" ng-model="userData.gender" name="gender" value="1">Male
                             </label>
                             <label>
-                                <input type="radio" name="gender-radio" value="female">Female
+                                <input type="radio" ng-model="userData.gender" name="gender" value="2">Female
                             </label>
                             <label>
-                                <input type="radio" name="gender-radio" value="other">Other
+                                <input type="radio" ng-model="userData.gender" name="gender" value="0">Other
                             </label>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 picture-upload">
+                    <div class="form-group">
+                        <img class="thumbnail picture-preview" src="{{userData.coverImageData}}" id="background-image-thumbnail"
+                             resizer="400,150"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="btn btn-primary" for="coverImage">Change background image
+                            <input type="file"
+                                   id="coverImage"
+                                   name="coverImage"
+                                   type="file"
+                                   ng-model="userData.coverImageData"
+                                   base-sixty-four-input
+                                   picture-checker="background-image-thumbnail">
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-3 picture-upload">
+            <div class="col-lg-4 picture-upload">
                 <div class="form-group">
-                    <img class="thumbnail picture-preview"/>
+                    <img class="thumbnail picture-preview" src="{{userData.profileImageData}}" id="profile-image-thumbnail"
+                          resizer="200,200"/>
                 </div>
-                <div class="form-group">
-                    <p class="picture-name"></p>
-                    <button type="button" id="upload-file-button" class="btn btn-md btn-info">Upload</button>
-                    <input type="file" id="picture"/>
-
-                    <p>Size limit: 128KB</p>
+                <div class="row">
+                    <label class="btn btn-primary" for="profile-image">
+                        Change profile image
+                    </label>
+                    <input class="file-button"
+                           id="profile-image"
+                           type="file"
+                           ng-model="userData.profileImageData"
+                           base-sixty-four-input
+                           picture-checker="profile-image-thumbnail"
+                            />
                 </div>
             </div>
+
 
             <div class="form-group col-lg-12">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="button" class="btn btn-lg btn-primary">Save Changes</button>
-                    <button type="button" class="cancel-btn btn btn-lg btn-default">Cancel</button>
+                <div class="col-lg-10 col-lg-offset-3">
+                    <a href="#/user/home" class="btn btn-default">Cancel</a>
+                    <button ng-click="editProfile(userData)" type="submit" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </fieldset>
     </form>
-</section>
+</div>

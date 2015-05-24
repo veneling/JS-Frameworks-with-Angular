@@ -4,29 +4,52 @@ socialNetwork.factory('userServices', function ($http, baseUrl) {
 
     var service = {};
 
-    service.UserLogin = function (loginData, success, error) {
-        var responsePromise =  $http.post(serviceUrl + '/login', loginData)
-            .success(function (data, status, headers, config) {
-                success(data);
-            })
-            .error(function (data, status, headers, config) {
-                error(data);
-            });
+    service.UserLogin = function (loginData) {
+        return $http({
+            method: 'POST',
+            url: serviceUrl + '/login',
+            data: loginData
+        })
     };
 
-    service.UserRegister = function (registerData, success, error) {
-        var responsePromise =  $http.post(serviceUrl + '/register', registerData)
-            .success(function (data, status, headers, config) {
-                success(data);
-            })
-            .error(function (data, status, headers, config) {
-                error(data);
-            });
+    service.UserRegister = function (registerData) {
+        return $http({
+            method: 'POST',
+            url: serviceUrl + '/register',
+            data: registerData
+        })
+    };
+
+    service.ChangePassword = function (passwords) {
+        console.log(this.GetHeaders());
+        return $http({
+            method: 'PUT',
+            url: baseUrl + '/me/changepassword',
+            data: passwords,
+            headers: this.GetHeaders()
+        })
+    };
+
+    service.EditProfile = function (userData) {
+        return $http({
+            method: 'PUT',
+            url: baseUrl + '/me',
+            data: userData,
+            headers: this.GetHeaders()
+        })
+    };
+
+    service.GetFullUserData = function () {
+        return $http({
+            method: 'GET',
+            url: serviceUrl + '/' + localStorage['username'],
+            headers: this.GetHeaders()
+        })
     };
 
     service.SetCredentials = function (loginData) {
-        localStorage['accessToken'] = loginData.access_token;
-        localStorage['username'] = loginData.userName;
+        localStorage['accessToken'] = loginData.data.access_token;
+        localStorage['username'] = loginData.data.userName;
     };
 
     service.GetUsername = function () {
@@ -37,7 +60,7 @@ socialNetwork.factory('userServices', function ($http, baseUrl) {
         localStorage.clear();
     };
 
-    service.GetHeaders = function() {
+    service.GetHeaders = function () {
         return {
             Authorization: "Bearer " + localStorage['accessToken']
         };

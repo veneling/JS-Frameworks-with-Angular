@@ -23,3 +23,59 @@ socialNetwork.directive('passwordMatch', [function () {
         }
     };
 }]);
+
+socialNetwork.directive('resizer', [function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, control) {
+
+            var customDimentions = attrs.resizer.split(',');
+            var width = parseInt(customDimentions[0]);
+            var height = parseInt(customDimentions[1]);
+
+            var sizeCheck = function () {
+                return element[0].width > width && element[0].height > height;
+            };
+
+            scope.$watch(sizeCheck(), function () {
+                element[0].width = width;
+                element[0].height = height;
+            })
+        }
+    }
+}]);
+
+socialNetwork.directive('pictureChecker', [function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, control) {
+
+            var imageType = attrs.pictureChecker.indexOf('profile') != -1;
+            var sizeLimit = imageType ? 128 : 1024;
+
+            element.bind('change', function () {
+
+                var file = element[0].files[0];
+                var sizeCheck = file.size / 1024 <= sizeLimit;
+                var typeCheck = file.type.match(/image\/.*/);
+
+                console.log(sizeCheck + ' ' + typeCheck);
+                if (typeCheck != null && sizeCheck) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        if (imageType == 'profile') {
+                            $('#profile-image-thumbnail').attr('src', reader.result);
+                            scope.userData.profileImageData = reader.result;
+                        } else {
+                            $('#background-image-thumbnail').attr('src', reader.result);
+                            scope.userData.coverImageData = reader.result;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    
+                }
+            });
+        }
+    }
+}]);
