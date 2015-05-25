@@ -1,13 +1,12 @@
 socialNetwork.controller('UserController', function ($scope, $location, $route, userServices, notify) {
 
+
     if (userServices.isLogged()) {
         $scope.userData = {};
         userServices.GetFullUserData()
             .then(
             function (userData) {
                 $scope.userData = userData.data;
-                checkForEmptyImages($scope.userData);
-                $scope.userData.gender = 1;
             },
             function (error) {
                 notify({
@@ -19,14 +18,13 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
         );
     }
 
-    function checkForEmptyImages(userData) {
+    function replaceEmptyImages(userData) {
         if (userData.coverImageData == null) {
             userData.coverImageData = 'http://www.tutorialrepublic.com/lib/images/bootstrap/twitter-bootstrap-image-styling.png';
         }
 
         if (userData.profileImageData == null) {
             userData.profileImageData = "http://www.unipartners.org/sites/default/files/default_images/user_blank_3.png";
-
         }
     }
 
@@ -49,7 +47,7 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
         userServices.EditProfile(data)
             .then(
             function success() {
-                $location.path('#/user/home');
+                $location.path('/user/home');
                 notify({
                     message: 'Your profile was successfully updated',
                     duration: 5000,

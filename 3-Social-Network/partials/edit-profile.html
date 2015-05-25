@@ -14,11 +14,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email:</label>
+                    <label for="email" class="col-lg-2 control-label">Email:</label>
 
                     <div class="col-lg-4">
-                        <input type="email" class="form-control" ng-model="userData.email" id="inputEmail"
-                               placeholder="Email">
+                        <input type="email" class="form-control" ng-model="userData.email" id="email" name="email"
+                               placeholder="Email" required>
+                    </div>
+                    <div ng-show="editUserProfileForm.$submitted || editUserProfileForm.email.$touched">
+                        <span ng-show="editUserProfileForm.email.$error.required" class="label label-warning">Confirm your email</span>
+                        <span ng-show="editUserProfileForm.email.$error.email"
+                              class="label label-warning">Not a valid email</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,10 +51,9 @@
                              resizer="400,150"/>
                     </div>
                     <div class="form-group">
-                        <label class="btn btn-primary" for="coverImage">Change background image
+                        <label class="btn btn-primary" for="cover-picture">Change background image
                             <input type="file"
-                                   id="coverImage"
-                                   name="coverImage"
+                                   id="cover-picture"
                                    type="file"
                                    base-sixty-four-input
                                    picture-checker="background-image-thumbnail">
@@ -65,11 +69,11 @@
                          resizer="200,200"/>
                 </div>
                 <div class="row">
-                    <label class="btn btn-primary" for="profile-image">
+                    <label class="btn btn-primary" for="profile-picture">
                         Change profile image
 
                         <input class="file-button"
-                               id="profile-image"
+                               id="profile-picture"
                                type="file"
                                base-sixty-four-input
                                picture-checker="profile-image-thumbnail">
@@ -81,7 +85,9 @@
             <div class="form-group col-lg-12">
                 <div class="col-lg-10 col-lg-offset-3">
                     <a href="#/user/home" class="btn btn-default">Cancel</a>
-                    <button ng-click="editProfile(userData)" type="submit" class="btn btn-primary">Update</button>
+                    <button ng-disabled="editUserProfileForm.$invalid" type="submit" class="btn btn-primary"
+                            ng-click="editProfile(userData)">Update
+                    </button>
                 </div>
             </div>
         </fieldset>

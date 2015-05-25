@@ -1,4 +1,4 @@
-socialNetwork.factory('userServices', function ($http, baseUrl) {
+socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
 
     var serviceUrl = baseUrl + '/users';
 
