@@ -91,19 +91,21 @@ socialNetwork.directive('pictureChecker', [function () {
     }
 }]);
 
-socialNetwork.directive('autocomplete', ['$http', function ($http, $location) {
+socialNetwork.directive('autocomplete', ['$http', '$location', function ($http, $location) {
     return function (scope, element, attrs) {
         element.autocomplete({
             delay: 500,
             source: function (request, response) {
-                scope.findFriends(request.term)
+                scope.findUsers(request.term)
                     .success(function (data) {
                         response(data)
                     })
             },
             select: function (event, ui) {
-                //redirect to user wall. ui holds the selected user as object
-
+                //redirect to user wall. ui holds the selected user as object.
+                $location.path('/users/' + ui.item.username);
+                scope.$apply();
+                return false;
             }
         }).data('ui-autocomplete')._renderItem = function (ul, item) {
             var menuItem;

@@ -51,7 +51,7 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
         localStorage['username'] = loginData.data.userName;
     };
 
-    service.findFriends = function (searchTerm) {
+    service.findUsers = function (searchTerm) {
         return $http({
             method: 'GET',
             url: serviceUrl + '/search?searchTerm=' + searchTerm,

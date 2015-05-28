@@ -80,7 +80,6 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
     };
 
     $scope.rejectFriendRequest = function (requestId, friendName) {
-
         userServices.rejectFriendRequest(requestId)
             .then(
             function success(data) {
@@ -95,7 +94,10 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
                 console.log(error)
             }
         )
+    };
 
-    }
+    $scope.findUsers = function (searchTerm) {
+        return userServices.findUsers(searchTerm)
+    };
 
 });

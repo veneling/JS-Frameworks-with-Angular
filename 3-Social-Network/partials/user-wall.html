@@ -1,14 +1,46 @@
-<div ng-include="'partials/user-header.html'"></div>
+<div ng-include="'partials/app-header.html'"></div>
 
-<div class="container">
+<div class="container" ng-controller="WallController">
+
+    <div class="col-lg-2" ng-include="'partials/user-header.html'">
+    </div>
+
+    <div class="col-lg-8">
+        <div class="media border" ng-repeat="post in wallData">
+            <div class="media-left" ng-click="redirectToUser(post.author.username)">
+                <a href="">
+                    <img class="media-object img-thumbnail" width="50" height="50"
+                         ng-src="{{post.author.profileImageData}}"
+                         alt="author image">
+                </a>
+
+            </div>
+            <div class="media-body">
+                <span>{{post.author.name}}</span>
+                <span>{{post.date | date:'dd.MM.yyyy hh:mm'}}</span>
+
+                <div> {{post.postContent}}</div>
+            </div>
+            <div class="media col-lg-offset-1" ng-repeat="comment in post.comments">
+                <div class="media-right" ng-click="redirectToUser(comment.author.username)">
+                    <a href="">
+                        <img class="media-object img-thumbnail" width="50" height="50"
+                             ng-src="{{comment.author.profileImageData}}"
+                             alt="author image">
+                    </a>
+
+                </div>
+                <div class="media-body">
+                    <span>{{comment.author.name}}</span>
+                    <span>{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
+
+                    <div> {{comment.commentContent}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col-lg-2">
-    </div>
-
-    <div class="col-lg-7">
-    </div>
-
-    <div class="col-lg-3">
     </div>
 
 </div>
