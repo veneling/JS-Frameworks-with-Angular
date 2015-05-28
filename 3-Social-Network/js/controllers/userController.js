@@ -1,31 +1,30 @@
-socialNetwork.controller('UserController', function ($scope, $location, $route, userServices, notify) {
-
+socialNetwork.controller('UserController', function ($scope, $rootScope, $location, $route, userServices, notify) {
 
     if (userServices.isLogged()) {
         $scope.userData = {};
-        userServices.GetFullUserData()
-            .then(
-            function (userData) {
-                $scope.userData = userData.data;
+        userServices.getFriendRequests()
+            .then(function (friendRequests) {
+                $scope.friendRequestsCount = friendRequests.data.length == 0 ? "" : friendRequests.data.length;
+                $scope.friendRequests = friendRequests.data;
+                userServices.getFullUserData()
+                    .then(
+                    function (userData) {
+                        $scope.userData = userData.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
             },
             function (error) {
                 notify({
-                    message: 'Unable to get current user data',
+                    message: 'Your session has expired. Please sign in again.',
                     duration: 5000,
                     position: 'center'
-                })
-            }
-        );
-    }
-
-    function replaceEmptyImages(userData) {
-        if (userData.coverImageData == null) {
-            userData.coverImageData = 'http://www.tutorialrepublic.com/lib/images/bootstrap/twitter-bootstrap-image-styling.png';
-        }
-
-        if (userData.profileImageData == null) {
-            userData.profileImageData = "http://www.unipartners.org/sites/default/files/default_images/user_blank_3.png";
-        }
+                });
+                userServices.ClearCredentials();
+                $location.path('/');
+            })
     }
 
     $scope.editProfile = function (userData) {
@@ -44,7 +43,7 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
             data.coverImageData = userData.coverImageData;
         }
 
-        userServices.EditProfile(data)
+        userServices.editProfile(data)
             .then(
             function success() {
                 $location.path('/user/home');
@@ -63,5 +62,40 @@ socialNetwork.controller('UserController', function ($scope, $location, $route, 
             }
         );
     };
+    
+    $scope.approveFriendRequest = function (requestId, friendName) {
+        userServices.approveFriendRequest(requestId)
+            .then(
+            function success(data) {
+                notify({
+                    message: 'You and ' + friendName + ' are now friends',
+                    duration: 5000,
+                    position: 'center'
+                });
+            },
+            function error(error) {
+                console.log(error)
+            }
+        )
+    };
+
+    $scope.rejectFriendRequest = function (requestId, friendName) {
+
+        userServices.rejectFriendRequest(requestId)
+            .then(
+            function success(data) {
+                notify({
+                    message: 'You rejected ' + friendName + "'s request",
+                    duration: 5000,
+                    position: 'center'
+                });
+                $location.path('/user/home');
+            },
+            function error(error) {
+                console.log(error)
+            }
+        )
+
+    }
 
 });

@@ -25,6 +25,14 @@ socialNetwork.config(['$routeProvider',
                 templateUrl: 'partials/change-password.html',
                 controller: 'BaseController'
             })
+            .when('/users/:username', {
+                templateUrl: 'partials/user-wall.html',
+                controller: 'BaseController'
+            })
+            .when('/logout', {
+                templateUrl: 'partials/welcome.html',
+                controller: 'AuthController'
+            })
             .otherwise({
                 redirectTo: '/'
             })

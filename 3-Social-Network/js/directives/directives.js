@@ -48,7 +48,7 @@ socialNetwork.directive('resizer', [function () {
 socialNetwork.directive('pictureChecker', [function () {
     return {
         restrict: 'A',
-        controller : 'NotiController',
+        controller: 'NotiController',
         link: function (scope, element, attrs, control) {
 
             var imageType = attrs.pictureChecker.indexOf('profile') != -1;
@@ -74,11 +74,11 @@ socialNetwork.directive('pictureChecker', [function () {
                     reader.readAsDataURL(file);
                 } else {
                     var message;
-                    if(!sizeCheck) {
+                    if (!sizeCheck) {
                         message = 'File should be up to ' + sizeLimit + 'KB. ';
                     }
-                    if(!typeCheck) {
-                        message = 'The file should be valid picture format (.jpg, .png...)';
+                    if (!typeCheck) {
+                        message = 'File should be valid picture format (.jpg, .png...)';
                     }
                     scope.note({
                         message: message,
@@ -87,6 +87,35 @@ socialNetwork.directive('pictureChecker', [function () {
                     });
                 }
             });
+        }
+    }
+}]);
+
+socialNetwork.directive('autocomplete', ['$http', function ($http, $location) {
+    return function (scope, element, attrs) {
+        element.autocomplete({
+            delay: 500,
+            source: function (request, response) {
+                scope.findFriends(request.term)
+                    .success(function (data) {
+                        response(data)
+                    })
+            },
+            select: function (event, ui) {
+                //redirect to user wall. ui holds the selected user as object
+
+            }
+        }).data('ui-autocomplete')._renderItem = function (ul, item) {
+            var menuItem;
+            if (item.profileImageData == null) {
+                menuItem = '<a><img src="/4-Social-Network/img/default-profile.jpg" width="40" height="40">' + item.name + '</a>'
+            } else {
+                menuItem = '<a><img src="' + item.profileImageData + '" width="40" heigth="40">' + item.name + '</a>'
+            }
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append(menuItem)
+                .appendTo(ul)
         }
     }
 }]);

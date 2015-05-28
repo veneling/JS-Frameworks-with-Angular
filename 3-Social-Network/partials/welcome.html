@@ -1,12 +1,17 @@
-<div>
-    <form class="login form-horizontal col-md-4" name="loginForm" ng-controller="AuthController">
-        <fieldset>
-            <legend><h2>Login</h2></legend>
-            <div class="col-md-12 form-info">
-                <div class="form-group">
-                    <label for="loginUsername" class="col-md-2 control-label">Username</label>
+<header class="row text-center" id="welcome-header">
+    <div class=""><h1>Welcome to Software University Social Network</h1></div>
+    <div class=""><img src="/4-Social-Network/img/default-profile.jpg" /></div>
+</header>
 
-                    <div class="col-md-5">
+<div class="container">
+    <form class="form-horizontal col-md-5" name="loginForm" ng-controller="AuthController">
+        <fieldset>
+            <legend><h3>Login</h3></legend>
+            <div class="form-info">
+                <div class="form-group">
+                    <label for="loginUsername" class="col-lg-2 control-label">Username</label>
+
+                    <div class="col-lg-5">
                         <input type="text" class="form-control" ng-model="user.loginUsername" id="loginUsername"
                                name="loginUsername" placeholder="Username" required>
                     </div>
@@ -16,9 +21,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword" class="col-md-2 control-label">Password</label>
+                    <label for="loginPassword" class="col-lg-2 control-label">Password</label>
 
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <input type="password" class="form-control" ng-model="user.loginPassword" id="loginPassword"
                                name="loginPassword" placeholder="Password" required>
                     </div>
@@ -37,17 +42,15 @@
             </div>
         </div>
     </form>
-</div>
 
-<div>
-    <form class="register form-horizontal col-md-8" name="registerForm" ng-controller="AuthController">
+    <form class="form-horizontal col-md-7" name="registerForm" ng-controller="AuthController">
         <fieldset>
-            <legend><h2>Create a new account</h2></legend>
-            <div class="col-md-12 form-info">
+            <legend><h3>Create a new account</h3></legend>
+            <div class="form-info">
                 <div class="form-group">
-                    <label for="registerUsername" class="col-md-2 control-label">Username:</label>
+                    <label for="registerUsername" class="col-lg-3 control-label">Username:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <input type="text" class="form-control" ng-model="user.registerUsername" id="registerUsername"
                                name="registerUsername" placeholder="Username" required>
                     </div>
@@ -56,9 +59,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="registerPassword" class="col-md-2 control-label">Password:</label>
+                    <label for="registerPassword" class="col-lg-3 control-label">Password:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <input type="password" class="form-control" ng-model="user.registerPassword"
                                id="registerPassword"
                                name="registerPassword" placeholder="Password"
@@ -71,9 +74,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="confirmPassword" class="col-md-2 control-label">Repeat password:</label>
+                    <label for="confirmPassword" class="col-lg-3 control-label">Repeat password:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <input type="password" class="form-control" ng-model="user.confirmPassword" id="confirmPassword"
                                name="confirmPassword" placeholder="Confirm password"
                                password-match="user.registerPassword">
@@ -84,9 +87,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-md-2 control-label">Name:</label>
+                    <label for="name" class="col-lg-3 control-label">Name:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <input type="text" class="form-control" ng-model="user.name" id="name" name="name"
                                placeholder="Name" required>
                     </div>
@@ -95,9 +98,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-md-2 control-label">Email:</label>
+                    <label for="email" class="col-lg-3 control-label">Email:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <input type="email" class="form-control" ng-model="user.email" id="email" name="email"
                                placeholder="Email" required>
                     </div>
@@ -108,9 +111,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Gender:</label>
+                    <label class="col-lg-3 control-label">Gender:</label>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <div class="radio" ng-init="user.gender=0">
                             <label>
                                 <input type="radio" ng-model="user.gender" name="gender-radio" value="1">Male
@@ -126,8 +129,8 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-8">
-                <div class="col-md-10 col-md-offset-2">
+            <div class="form-group col-lg-8">
+                <div class="col-lg-10 col-lg-offset-2">
                     <button type="button" id="register-button" ng-disabled="registerForm.$invalid"
                             class="btn btn-md btn-primary" ng-click="register(user)">Register
                     </button>
