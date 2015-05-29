@@ -6,7 +6,7 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
             .then(function (friendRequests) {
                 $scope.friendRequestsCount = friendRequests.data.length == 0 ? "" : friendRequests.data.length;
                 $scope.friendRequests = friendRequests.data;
-                userServices.getFullUserData()
+                userServices.getFullUserData(userServices.getUserName())
                     .then(
                     function (userData) {
                         $scope.userData = userData.data;
@@ -22,7 +22,7 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
                     duration: 5000,
                     position: 'center'
                 });
-                userServices.ClearCredentials();
+                userServices.clearCredentials();
                 $location.path('/');
             })
     }
@@ -72,6 +72,7 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
                     duration: 5000,
                     position: 'center'
                 });
+                $location.path('/user/home');
             },
             function error(error) {
                 console.log(error)

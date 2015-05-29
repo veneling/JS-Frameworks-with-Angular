@@ -1,7 +1,6 @@
 socialNetwork.controller('AuthController', function ($scope, $location, $route, userServices, notify) {
 
     $scope.login = function (user) {
-
         userServices.userLogin({
             username: user.loginUsername,
             password: user.loginPassword
@@ -76,7 +75,7 @@ socialNetwork.controller('AuthController', function ($scope, $location, $route, 
             duration: 3000,
             position: 'center'
         });
-        userServices.ClearCredentials();
+        userServices.clearCredentials();
         $location.path('/');
     };
 

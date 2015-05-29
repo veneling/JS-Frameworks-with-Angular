@@ -14,7 +14,7 @@ socialNetwork.config(['$routeProvider',
                 controller: 'BaseController'
             })
             .when('/user/home', {
-                templateUrl: 'partials/user-header.html',
+                templateUrl: 'partials/app-header.html',
                 controller: 'BaseController'
             })
             .when('/user/edit-profile', {

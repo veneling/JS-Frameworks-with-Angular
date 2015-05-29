@@ -1,0 +1,7 @@
+<div ng-controller="UserHeaderController" class="col-lg-12 header-container media">
+    <span class="user-name">{{userHeader.name}}</span>
+    <img ng-src="{{userHeader.coverImageData}}" class="center-block background-picture" />
+    <img ng-src="{{userHeader.profileImageData}}" class="center-block profile-picture"/>
+    <a href="" class="is-friend" ng-if="userHeader.isFriend == false" ng-click="sendFriendRequest()">Send friend request</a>
+    <a href="" class="is-friend" ng-if="userHeader.isFriend == true">Friends</a>
+</div>
