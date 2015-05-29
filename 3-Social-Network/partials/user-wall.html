@@ -11,8 +11,8 @@
         <main class="padding-top">
             <div class="well well-lg" ng-repeat="post in wallData">
                 <div class="media">
-                    <div class="media-left" ng-click="redirectToUser(post.author.username)">
-                        <a href="">
+                    <div class="media-left">
+                        <a href="#/users/{{post.author.username}}">
                             <img class="media-object img-thumbnail" width="50" height="50"
                                  ng-src="{{post.author.profileImageData}}"
                                  alt="author image">
@@ -21,7 +21,7 @@
 
                     <div class="media-body media-left">
                         <h5 class="media-heading">
-                            <a href="" ng-click="redirectToUser(post.author.username)">{{post.author.name}}</a>
+                            <a href="#/users/{{post.author.username}}">{{post.author.name}}</a>
                         </h5>
                         <span>{{post.date | date:'dd.MM.yyyy hh:mm'}}</span>
 
@@ -33,8 +33,8 @@
                         </footer>
                     </div>
                     <div class="col-lg-offset-1" ng-repeat="comment in post.comments">
-                        <div class="media-left" ng-click="redirectToUser(comment.author.username)">
-                            <a href="">
+                        <div class="media-left">
+                            <a href="#/users/{{comment.author.username}}">
                                 <img class="media-object img-thumbnail" width="50" height="50"
                                      ng-src="{{comment.author.profileImageData}}"
                                      alt="author image">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="media-body media-left">
-                            <a href="" class="media-heading" ng-click="redirectToUser(comment.author.username)">{{comment.author.name}}</a>
+                            <a href="#/users/{{comment.author.username}}" class="media-heading">{{comment.author.name}}</a>
                             <span>{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
 
                             <div> {{comment.commentContent}}</div>

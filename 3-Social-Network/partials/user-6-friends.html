@@ -1,0 +1,10 @@
+<div class="media" ng-controller="FriendsController">
+    <h5 class="media-heading">My friends <a href="#/all-friends">Click to view all {{friendsListCount}}</a></h5>
+
+    <div class="media-body">
+        <a href="#/users/{{friend.username}}" ng-repeat="friend in friendsList|limitTo:6">
+            <img ng-src="{{friend.profileImageData}}" class="img-circle media-object"/>
+        </a>
+    </div>
+
+</div>

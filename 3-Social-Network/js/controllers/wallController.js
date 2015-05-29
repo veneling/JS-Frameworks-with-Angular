@@ -23,12 +23,7 @@ socialNetwork.controller('WallController', function ($scope, $routeParams, $loca
             }
         )
     };
-
-    $scope.redirectToUser = function (username) {
-        $location.path('/users/' + username);
-    };
-
-
+    
     if (username) {
         $scope.getUserWall();
         $(window).scroll(function () {
@@ -37,7 +32,7 @@ socialNetwork.controller('WallController', function ($scope, $routeParams, $loca
                 documentHeight = $(document).height(),
                 windowHeight = $(window).height(),
                 scrollOffset = 1;
-            
+
             if ((documentHeight - scrollTop - windowHeight) <= scrollOffset && !$scope.loadingPosts) {
 
                 $scope.getUserWall();

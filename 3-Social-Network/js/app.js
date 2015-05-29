@@ -14,7 +14,7 @@ socialNetwork.config(['$routeProvider',
                 controller: 'BaseController'
             })
             .when('/user/home', {
-                templateUrl: 'partials/app-header.html',
+                templateUrl: 'partials/news-feed.html',
                 controller: 'BaseController'
             })
             .when('/user/edit-profile', {
@@ -27,6 +27,10 @@ socialNetwork.config(['$routeProvider',
             })
             .when('/users/:username', {
                 templateUrl: 'partials/user-wall.html',
+                controller: 'BaseController'
+            })
+            .when('/all-friends', {
+                templateUrl: 'partials/user-all-friends.html',
                 controller: 'BaseController'
             })
             .when('/logout', {

@@ -44,10 +44,10 @@ body {
 .profile-picture {
     z-index: 100;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     left: 30px;
-    top: 120px;
+    top: 90px;
     display: inline-block;
     padding: 4px;
     line-height: 1.42857143;
@@ -69,7 +69,7 @@ body {
     1px 1px 0 #000;
     font-size: 24px;
     font-weight: bold;
-    left: 100px;
+    left: 130px;
     top: 120px;
     width: 300px;
 }

@@ -1,0 +1,11 @@
+<div class="well">
+    <form name="addPostForm">
+        <div class="form-group">
+            <textarea class="form-control" ng-model="postContent" placeholder="Say something to the world"
+                     rows="3" required></textarea>
+        </div>
+        <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid">Say it now</button>
+    </form>
+</div>
+
+<div ng-include="'partials/user-6-friends.html'"></div>

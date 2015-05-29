@@ -1,0 +1,28 @@
+<div ng-include="'partials/app-header.html'"></div>
+
+<div class="container">
+
+    <section>
+        <input type="text" class="form-control col-lg-5" id="searchUser" ng-model="userQuery.name"
+               placeholder="Type to filter your friends">
+    </section>
+
+    <section>
+        <div ng-controller="FriendsController" class="container">
+
+            <div class="well col-lg-2" ng-repeat="friend in friendsList | filter:userQuery">
+                <div class="media-left">
+                    <a href="#/users/{{friend.username}}">
+                        <img ng-src="{{friend.profileImageData}}" class="img-thumbnail media-object"/>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <h5 class="media-heading">
+                        <a href="#/users/{{friend.username}}">{{friend.name}}</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

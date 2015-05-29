@@ -102,6 +102,22 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
         })
     };
 
+    service.getOwnFriends = function (requestId) {
+        return $http({
+            method: 'GET',
+            url: baseUrl + '/me/friends/preview',
+            headers: this.getHeaders()
+        })
+    };
+
+    service.getMyNewsFeed = function (requestId) {
+        return $http({
+            method: 'GET',
+            url: baseUrl + '/me/feed?StartPostId=&PageSize=5',
+            headers: this.getHeaders()
+        })
+    };
+
     service.getUserName = function () {
         return localStorage['username'];
     };
