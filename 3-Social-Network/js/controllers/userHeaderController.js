@@ -1,4 +1,4 @@
-socialNetwork.controller('UserHeaderController', function ($scope, $routeParams, $location, userServices, notify) {
+socialNetwork.controller('UserHeaderController', function ($scope, $rootScope, $routeParams, $location, userServices, notify) {
 
 
     $scope.getFullUserData = function (username) {
@@ -6,12 +6,12 @@ socialNetwork.controller('UserHeaderController', function ($scope, $routeParams,
             .then(
             function success(response) {
                 //console.log(response);
-                $scope.userHeader = response.data;
-                if($scope.userHeader.coverImageData == null) {
-                    $scope.userHeader.coverImageData = userServices.getDefaultBackgroundImage();
+                $rootScope.userHeader = response.data;
+                if($rootScope.userHeader.coverImageData == null) {
+                    $rootScope.userHeader.coverImageData = userServices.getDefaultBackgroundImage();
                 }
-                if($scope.userHeader.profileImageData == null) {
-                    $scope.userHeader.profileImageData = userServices.getDefaultProfileImage();
+                if($rootScope.userHeader.profileImageData == null) {
+                    $rootScope.userHeader.profileImageData = userServices.getDefaultProfileImage();
                 }
             },
             function error(error) {
@@ -33,7 +33,7 @@ socialNetwork.controller('UserHeaderController', function ($scope, $routeParams,
             function error(error) {
                 if(error.data.message == 'A pending request already exists.') {
                     notify({
-                        message: 'You have pending request to this user',
+                        message: 'You have pending request to this user which he/she still hasn\'t reviewed.',
                         duration: 5000,
                         position: 'center'
                     });

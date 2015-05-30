@@ -13,16 +13,23 @@
                 <div ng-include="'partials/post-content.html'"></div>
             </div>
 
-            <div ng-show="loadingPosts">
-                <h4>Loading next 5 posts...</h4>
-            </div>
-            <div ng-show="noMorePostsToShow">
-                <h4>This user doesn't have more posts to show</h4>
-            </div>
+            <div ng-include="'partials/loading-posts-indicator.html'"></div>
         </main>
     </div>
 
-    <div class="col-lg-3"></div>
+    <div class="col-lg-3 sn-padding-top-190" ng-if="userHeader.isFriend">
+        <div class="well">
+            <form name="addPostForm">
+                <div class="form-group">
+            <textarea class="form-control" ng-model="postContent" placeholder="Say something to {{userHeader.name}}"
+                      rows="3" required></textarea>
+                </div>
+                <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid" ng-controller="PostController"
+                        ng-click="addNewPost(postContent, userHeader.username)">Say it now
+                </button>
+            </form>
+        </div>
+    </div>
 
 
 </div>

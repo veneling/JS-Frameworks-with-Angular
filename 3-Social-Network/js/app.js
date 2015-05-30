@@ -33,10 +33,6 @@ socialNetwork.config(['$routeProvider',
                 templateUrl: 'partials/user-all-friends.html',
                 controller: 'BaseController'
             })
-            .when('/logout', {
-                templateUrl: 'partials/welcome.html',
-                controller: 'AuthController'
-            })
             .otherwise({
                 redirectTo: '/'
             })

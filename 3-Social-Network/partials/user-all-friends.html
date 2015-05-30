@@ -1,18 +1,17 @@
-
 <div class="container">
 
-    <section>
-        <input type="text" class="form-control col-lg-5" id="searchUser" ng-model="userQuery.name"
+    <section class="col-lg-3">
+        <input type="text" class="form-control " id="searchUser" ng-model="userQuery.name"
                placeholder="Type to filter your friends">
     </section>
-
+    <div></div>
     <section>
         <div ng-controller="FriendsController" class="container">
 
-            <div class="well col-lg-2" ng-repeat="friend in friendsList | filter:userQuery">
-                <div class="media-left">
+            <div class="sn-well col-lg-1" ng-repeat="friend in friendsList | filter:userQuery">
+                <div class="media-body center-block">
                     <a href="#/users/{{friend.username}}">
-                        <img ng-src="{{friend.profileImageData}}" class="img-thumbnail media-object"/>
+                        <img ng-src="{{friend.profileImageData}}" class="sn-avatar media-object center-block"/>
                     </a>
                 </div>
 

@@ -3,7 +3,7 @@
     <!-- begin displaying post content -->
     <div class="media-left">
         <a href="#/users/{{post.author.username}}">
-            <img class="media-object img-thumbnail" width="50" height="50"
+            <img class="media-object sn-avatar"
                  ng-src="{{post.author.profileImageData}}"
                  alt="author image">
         </a>
@@ -29,7 +29,7 @@
     <div class="col-lg-offset-1 sn-padding-bottom-5" ng-repeat="comment in post.comments">
         <div class="media-left">
             <a href="#/users/{{comment.author.username}}">
-                <img class="media-object img-thumbnail" width="50" height="50"
+                <img class="media-object sn-avatar"
                      ng-src="{{comment.author.profileImageData}}"
                      alt="author image">
             </a>

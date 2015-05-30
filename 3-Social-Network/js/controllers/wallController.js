@@ -31,7 +31,7 @@ socialNetwork.controller('WallController', function ($scope, $routeParams, $loca
             var scrollTop = $(window).scrollTop(),
                 documentHeight = $(document).height(),
                 windowHeight = $(window).height(),
-                scrollOffset = 1;
+                scrollOffset = 10;
 
             if ((documentHeight - scrollTop - windowHeight) <= scrollOffset && !$scope.loadingPosts) {
 
