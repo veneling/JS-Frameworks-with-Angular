@@ -1,14 +1,14 @@
-socialNetwork.controller('BaseController', function ($scope, $location, $route, userServices) {
+socialNetwork.controller('BaseController', function ($scope, $rootScope, $location, $route, userServices) {
 
     $scope.isLogged = function () {
+
         userServices.isLogged()
             .then(function success() {
-                return true;
-            },
-            function error() {
+                $rootScope.loggedIn = true;
+            }, function error() {
+                $rootScope.loggedIn = false;
                 $location.path('/');
-                return false;
-            })
+            });
     };
 
     $scope.isLogged();

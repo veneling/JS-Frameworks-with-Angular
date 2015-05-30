@@ -36,7 +36,7 @@
 </head>
 <body ng-app="socialNetwork" ng-cloak>
 
-<div ng-controller="BaseController" ng-if="!isLogged()" ng-include="'partials/app-header.html'"></div>
+<div ng-controller="BaseController" ng-if="loggedIn" ng-include="'partials/app-header.html'"></div>
 
 <div ng-view></div>
 </body>

@@ -1,5 +1,5 @@
-socialNetwork.controller('AuthController', function ($scope, $location, $route, userServices, notify) {
-
+socialNetwork.controller('AuthController', function ($scope, $rootScope, $location, $route, userServices, notify) {
+    
     $scope.login = function (user) {
         userServices.userLogin({
             username: user.loginUsername,
@@ -7,8 +7,10 @@ socialNetwork.controller('AuthController', function ($scope, $location, $route, 
         })
             .then(
             function success(response) {
+                $rootScope.loggedIn = true;
                 userServices.setCredentials(response);
                 $location.path('/user/home');
+                $route.reload();
             },
             function error(error) {
                 notify({
@@ -75,8 +77,10 @@ socialNetwork.controller('AuthController', function ($scope, $location, $route, 
             duration: 3000,
             position: 'center'
         });
+        $rootScope.loggedIn = false;
         userServices.clearCredentials();
         $location.path('/');
+        $route.reload();
     };
 
     $scope.changePassword = function (passwords) {

@@ -1,96 +1,95 @@
-<div class="row">
-    <form class="register form-horizontal col-lg-12" name="registerForm" ng-controller="AuthController">
-        <fieldset>
-            <legend><h2>Create a new account</h2></legend>
-            <div class="col-lg-9 form-info">
-                <div class="form-group">
-                    <label for="username" class="col-lg-3 control-label">Username:</label>
+<form class="form-horizontal col-md-7" name="registerForm" ng-controller="AuthController">
+    <fieldset>
+        <legend><h3>Create a new account</h3></legend>
+        <div class="form-info">
+            <div class="form-group">
+                <label for="registerUsername" class="col-lg-3 control-label">Username:</label>
 
-                    <div class="col-lg-3">
-                        <input type="text" class="form-control" ng-model="user.username" id="username" name="username"
-                               placeholder="Username"
-                               required>
-                    </div>
-                    <div ng-show="registerForm.$submitted || registerForm.username.$touched">
-                        <span ng-show="registerForm.username.$error.required">Username is required</span>
-                    </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" ng-model="user.registerUsername" id="registerUsername"
+                           name="registerUsername" placeholder="Username" required>
                 </div>
-                <div class="form-group">
-                    <label for="password" class="col-lg-3 control-label">Password:</label>
-
-                    <div class="col-lg-3">
-                        <input type="password" class="form-control" ng-model="user.password" id="password"
-                               name="password" placeholder="Password"
-                               minlength="6" maxlength="100" required>
-                    </div>
-                    <div ng-show="registerForm.$submitted || registerForm.password.$touched">
-                        <span ng-show="registerForm.password.$error.required">Password is required</span>
-                        <span ng-show="registerForm.password.$error.minlength">Password must be at least 6 characters long</span>
-                        <span ng-show="registerForm.password.$error.maxlength">Password must be less than 100 characters long</span>
-                    </div>
+                <div ng-show="registerForm.$submitted || registerForm.registerUsername.$touched">
+                    <span ng-show="registerForm.registerUsername.$error.required" class="label label-warning">Username is required</span>
                 </div>
-                <div class="form-group">
-                    <label for="confirmPassword" class="col-lg-3 control-label">Repeat password:</label>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword" class="col-lg-3 control-label">Password:</label>
 
-                    <div class="col-lg-3">
-                        <input type="password" class="form-control" ng-model="user.confirmPassword" id="confirmPassword"
-                               name="confirmPassword" placeholder="Confirm password" password-match="user.password">
-                    </div>
-                    <div ng-show="registerForm.$submitted || registerForm.confirmPassword.$touched">
-                        <span ng-show="registerForm.confirmPassword.$error.required">Confirm your password</span>
-                        <span ng-show="registerForm.confirmPassword.$error.unique">Passwords doesn't match</span>
-                    </div>
+                <div class="col-lg-4">
+                    <input type="password" class="form-control" ng-model="user.registerPassword"
+                           id="registerPassword"
+                           name="registerPassword" placeholder="Password"
+                           minlength="6" maxlength="100" required>
                 </div>
-                <div class="form-group">
-                    <label for="name" class="col-lg-3 control-label">Name:</label>
-
-                    <div class="col-lg-3">
-                        <input type="text" class="form-control" ng-model="user.name" id="name" name="name"
-                               placeholder="Name" required>
-                    </div>
-                    <div ng-show="registerForm.$submitted || registerForm.name.$touched">
-                        <span ng-show="registerForm.name.$error.required">Name field is mandatory</span>
-                    </div>
+                <div ng-show="registerForm.$submitted || registerForm.registerPassword.$touched">
+                    <span ng-show="registerForm.registerPassword.$error.required" class="label label-warning">Password is required</span>
+                    <span ng-show="registerForm.registerPassword.$error.minlength" class="label label-warning">Password must be at least 6 characters long</span>
+                    <span ng-show="registerForm.registerPassword.$error.maxlength" class="label label-warning">Password must be less than 100 characters long</span>
                 </div>
-                <div class="form-group">
-                    <label for="email" class="col-lg-3 control-label">Email:</label>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" class="col-lg-3 control-label">Repeat password:</label>
 
-                    <div class="col-lg-3">
-                        <input type="email" class="form-control" ng-model="user.email" id="email" name="email"
-                               placeholder="Email" required>
-                    </div>
-                    <div ng-show="registerForm.$submitted || registerForm.email.$touched">
-                        <span ng-show="registerForm.email.$error.required">Email field is mandatory</span>
-                        <span ng-show="registerForm.email.$error.email">Not a valid email</span>
-                    </div>
+                <div class="col-lg-4">
+                    <input type="password" class="form-control" ng-model="user.confirmPassword" id="confirmPassword"
+                           name="confirmPassword" placeholder="Confirm password"
+                           password-match="user.registerPassword">
                 </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Gender:</label>
+                <div ng-show="registerForm.$submitted || registerForm.confirmPassword.$touched">
+                    <span ng-show="registerForm.confirmPassword.$error.required" class="label label-warning">Confirm your password</span>
+                    <span ng-show="registerForm.confirmPassword.$error.unique" class="label label-warning">Passwords doesn't match</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-lg-3 control-label">Name:</label>
 
-                    <div class="col-lg-3">
-                        <div class="radio" ng-init="user.gender=0">
-                            <label>
-                                <input type="radio" ng-model="user.gender" name="gender-radio" value="1">Male
-                            </label>
-                            <label>
-                                <input type="radio" ng-model="user.gender" name="gender-radio" value="2">Female
-                            </label>
-                            <label>
-                                <input type="radio" ng-model="user.gender" name="gender-radio" value="0">Other
-                            </label>
-                        </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" ng-model="user.name" id="name" name="name"
+                           placeholder="Name" required>
+                </div>
+                <div ng-show="registerForm.$submitted || registerForm.name.$touched">
+                    <span ng-show="registerForm.name.$error.required" class="label label-warning">Name field is mandatory</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-lg-3 control-label">Email:</label>
+
+                <div class="col-lg-4">
+                    <input type="email" class="form-control" ng-model="user.email" id="email" name="email"
+                           placeholder="Email" required>
+                </div>
+                <div ng-show="registerForm.$submitted || registerForm.email.$touched">
+                    <span ng-show="registerForm.email.$error.required" class="label label-warning">Email field is mandatory</span>
+                        <span ng-show="registerForm.email.$error.email"
+                              class="label label-warning">Not a valid email</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Gender:</label>
+
+                <div class="col-lg-4">
+                    <div class="radio" ng-init="user.gender=0">
+                        <label>
+                            <input type="radio" ng-model="user.gender" name="gender-radio" value="1">Male
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="user.gender" name="gender-radio" value="2">Female
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="user.gender" name="gender-radio" value="0">Other
+                        </label>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group col-lg-12">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="button" id="register-button" ng-disabled="registerForm.$invalid"
-                            class="btn btn-lg btn-primary" ng-click="register(user)">Register</button>
-                    <span>or</span>
-                    <a href="#/login">Login</a>
-                </div>
+        <div class="form-group col-lg-8">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="button" id="register-button" ng-disabled="registerForm.$invalid"
+                        class="btn btn-md btn-primary" ng-click="register(user)">Register
+                </button>
             </div>
-        </fieldset>
-    </form>
-</div>
+        </div>
+    </fieldset>
+</form>

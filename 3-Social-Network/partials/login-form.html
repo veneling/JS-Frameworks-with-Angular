@@ -1,39 +1,38 @@
-<div class="row">
-    <form class="login form-horizontal col-md-6" name="loginForm" ng-controller="AuthController">
-        <fieldset>
-            <legend><h2>Login</h2></legend>
+<form class="form-horizontal col-md-5" name="loginForm" ng-controller="AuthController">
+    <fieldset>
+        <legend><h3>Login</h3></legend>
+        <div class="form-info">
             <div class="form-group">
-                <label for="username" class="col-lg-4 control-label">Username</label>
+                <label for="loginUsername" class="col-lg-2 control-label">Username</label>
 
-                <div class="col-lg-4">
-                    <input type="text" class="form-control" ng-model="user.username" id="username" name="username"
-                           placeholder="Username" required>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" ng-model="user.loginUsername" id="loginUsername"
+                           name="loginUsername" placeholder="Username" required>
                 </div>
-                <div ng-show="loginForm.$submitted || loginForm.username.$touched" >
-                    <span ng-show="loginForm.username.$error.required" class="label label-warning">Username is required</span>
+                <div ng-show="loginForm.$submitted || loginForm.loginUsername.$touched">
+                    <span ng-show="loginForm.loginUsername.$error.required"
+                          class="label label-warning">Username is required</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-lg-4 control-label">Password</label>
+                <label for="loginPassword" class="col-lg-2 control-label">Password</label>
 
-                <div class="col-lg-4">
-                    <input type="password" class="form-control" ng-model="user.password" id="password" name="password"
-                           placeholder="Password" required>
+                <div class="col-lg-5">
+                    <input type="password" class="form-control" ng-model="user.loginPassword" id="loginPassword"
+                           name="loginPassword" placeholder="Password" required>
                 </div>
-                <div ng-show="loginForm.$submitted || loginForm.password.$touched">
-                    <span ng-show="loginForm.password.$error.required" class="label label-warning">Password is required</span>
+                <div ng-show="loginForm.$submitted || loginForm.loginPassword.$touched">
+                    <span ng-show="loginForm.loginPassword.$error.required" class="label label-warning">Password is required</span>
                 </div>
-            </div>
-        </fieldset>
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="button" id="login-button" ng-disabled="loginForm.$invalid" class="btn btn-lg btn-primary"
-                        ng-click="login(user)">
-                    Login
-                </button>
-                <span>or</span>
-                <a href="#/register">Register</a>
             </div>
         </div>
-    </form>
-</div>
+    </fieldset>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="button" id="login-button" ng-disabled="loginForm.$invalid" class="btn btn-md btn-primary"
+                    ng-click="login(user)">
+                Login
+            </button>
+        </div>
+    </div>
+</form>

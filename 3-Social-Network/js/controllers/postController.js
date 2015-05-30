@@ -1,4 +1,4 @@
-socialNetwork.controller('PostController', function ($scope, $rootScope, $location, userServices, notify) {
+socialNetwork.controller('PostController', function ($scope, $rootScope, $location, $route, userServices, notify) {
 
     $scope.addNewPost = function (postContent, username) {
 
@@ -6,8 +6,8 @@ socialNetwork.controller('PostController', function ($scope, $rootScope, $locati
         userServices.addNewPost(postContent, user)
             .then(
             function success() {
-                console.log('post posted');
-                $location.path('/user/home');
+                $location.path('/users/' + username);
+                $route.reload();
             },
             function error() {
 

@@ -1,4 +1,3 @@
-
 <div class="container">
     <form class="form-horizontal" name="editUserProfileForm" ng-controller="UserController">
         <fieldset>
@@ -47,7 +46,7 @@
 
             <div class="col-lg-3 picture-upload">
                 <div class="form-group">
-                    <img class="thumbnail picture-preview" src="{{userData.profileImageData}}"
+                    <img class="thumbnail picture-preview" ng-src="{{userData.profileImageData}}"
                          id="profile-image-thumbnail"
                          resizer="150,150"/>
                 </div>
@@ -66,7 +65,7 @@
 
             <div class="col-lg-4 picture-upload">
                 <div class="form-group">
-                    <img class="thumbnail picture-preview" src="{{userData.coverImageData}}"
+                    <img class="thumbnail picture-preview" ng-src="{{userData.coverImageData}}"
                          id="background-image-thumbnail"
                          resizer="400,150"/>
                 </div>

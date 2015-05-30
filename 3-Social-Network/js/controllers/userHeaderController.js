@@ -5,7 +5,7 @@ socialNetwork.controller('UserHeaderController', function ($scope, $rootScope, $
         userServices.getFullUserData(username)
             .then(
             function success(response) {
-                //console.log(response);
+                console.log(response);
                 $rootScope.userHeader = response.data;
                 if($rootScope.userHeader.coverImageData == null) {
                     $rootScope.userHeader.coverImageData = userServices.getDefaultBackgroundImage();
