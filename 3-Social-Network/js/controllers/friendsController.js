@@ -1,4 +1,4 @@
-socialNetwork.controller('FriendsController', function ($scope, $routeParams, $location, userServices) {
+socialNetwork.controller('FriendsController', function ($scope, $routeParams, $location, userServices, notify) {
 
     $scope.getOwnFriends = function () {
         userServices.getOwnFriends()
@@ -10,10 +10,22 @@ socialNetwork.controller('FriendsController', function ($scope, $routeParams, $l
                 }
                 $scope.friendsList = response.data.friends;
                 $scope.friendsListCount = response.data.totalCount;
-                console.log($scope.friendsList);
             },
             function error(error) {
-                console.log(error)
+                if(error.data.message = 'Session token expired or not valid.') {
+                    notify({
+                        message: error.data.message,
+                        duration: 5000,
+                        position: 'center'
+                    })
+                } else {
+                    notify({
+                        message: 'Unexpected error. Please, login again.',
+                        duration: 5000,
+                        position: 'center'
+                    });
+                    $location.path('/');
+                }
             })
     };
 

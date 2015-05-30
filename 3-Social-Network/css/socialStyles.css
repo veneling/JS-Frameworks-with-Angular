@@ -98,14 +98,17 @@ body {
     padding-top: 190px;
 }
 
-.margin-top-small {
-    margin-top: 10px;
+.sn-padding-right-5 {
+    padding-right: 5px;
 }
 
-.overflow-off {
-    overflow: hidden;
+.sn-padding-bottom-5 {
+    padding-bottom: 5px;
 }
 
-.width-auto {
-    width: auto;
+.sn-panel-footer-no-border {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }

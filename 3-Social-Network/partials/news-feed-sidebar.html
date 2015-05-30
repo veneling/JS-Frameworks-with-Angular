@@ -2,9 +2,11 @@
     <form name="addPostForm">
         <div class="form-group">
             <textarea class="form-control" ng-model="postContent" placeholder="Say something to the world"
-                     rows="3" required></textarea>
+                      rows="3" required></textarea>
         </div>
-        <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid">Say it now</button>
+        <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid" ng-controller="PostController"
+                ng-click="addNewPost(postContent)">Say it now
+        </button>
     </form>
 </div>
 

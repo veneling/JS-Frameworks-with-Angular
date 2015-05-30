@@ -121,3 +121,7 @@ socialNetwork.directive('autocomplete', ['$http', '$location', function ($http, 
         }
     }
 }]);
+
+socialNetwork.directive('userDataLoad', ['$http', '$location', function ($http, $location) {
+
+}]);

@@ -1,11 +1,16 @@
-socialNetwork.controller('BaseController', function ($scope, $location, $route, userServices, notify) {
+socialNetwork.controller('BaseController', function ($scope, $location, $route, userServices) {
 
-    if (userServices.isLogged() == undefined) {
-        $location.path('/');
-    } else {
-        if ($location.path() == '/') {
-            $location.path('/user/home');
-        }
-    }
+    $scope.isLogged = function () {
+        userServices.isLogged()
+            .then(function success() {
+                return true;
+            },
+            function error() {
+                $location.path('/');
+                return false;
+            })
+    };
+
+    $scope.isLogged();
 
 });

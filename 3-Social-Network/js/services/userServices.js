@@ -110,10 +110,25 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
         })
     };
 
-    service.getMyNewsFeed = function (requestId) {
+    service.getMyNewsFeed = function (startPost, pageSize) {
+        var start = startPost || '';
+        var size = pageSize || 5;
+
         return $http({
             method: 'GET',
-            url: baseUrl + '/me/feed?StartPostId=&PageSize=5',
+            url: baseUrl + '/me/feed?StartPostId=' + start + '&PageSize=' + size,
+            headers: this.getHeaders()
+        })
+    };
+
+    service.addNewPost = function (postContent, username) {
+        return $http({
+            method: 'POST',
+            url: baseUrl + '/posts',
+            data : {
+                postContent : postContent,
+                username : username
+            },
             headers: this.getHeaders()
         })
     };
@@ -133,7 +148,11 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
     };
 
     service.isLogged = function () {
-        return localStorage['accessToken'];
+        return $http({
+            method: 'GET',
+            url : baseUrl + '/me',
+            headers : this.getHeaders()
+        })
     };
 
     service.getDefaultProfileImage = function () {

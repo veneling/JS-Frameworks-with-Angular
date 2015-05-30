@@ -31,7 +31,13 @@ socialNetwork.controller('UserHeaderController', function ($scope, $routeParams,
                 });
             },
             function error(error) {
-                console.log(error);
+                if(error.data.message == 'A pending request already exists.') {
+                    notify({
+                        message: 'You have pending request to this user',
+                        duration: 5000,
+                        position: 'center'
+                    });
+                }
             }
         )
     };

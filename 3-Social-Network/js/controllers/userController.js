@@ -1,31 +1,27 @@
 socialNetwork.controller('UserController', function ($scope, $rootScope, $location, $route, userServices, notify) {
 
-    if (userServices.isLogged()) {
-        $scope.userData = {};
-        userServices.getFriendRequests()
-            .then(function (friendRequests) {
-                $scope.friendRequestsCount = friendRequests.data.length == 0 ? "" : friendRequests.data.length;
-                $scope.friendRequests = friendRequests.data;
-                userServices.getFullUserData(userServices.getUserName())
-                    .then(
-                    function (userData) {
-                        $scope.userData = userData.data;
-                    },
-                    function (error) {
-                        console.log(error);
-                    }
-                );
-            },
-            function (error) {
-                notify({
-                    message: 'Your session has expired. Please sign in again.',
-                    duration: 5000,
-                    position: 'center'
-                });
-                userServices.clearCredentials();
-                $location.path('/');
-            })
-    }
+    $scope.userDataLoad = function () {
+        if (userServices.isLogged()) {
+            $rootScope.userData = {};
+            userServices.getFriendRequests()
+                .then(function (friendRequests) {
+                    $scope.friendRequestsCount = friendRequests.data.length == 0 ? "" : friendRequests.data.length;
+                    $scope.friendRequests = friendRequests.data;
+                    userServices.getFullUserData(userServices.getUserName())
+                        .then(
+                        function (userData) {
+                            $rootScope.userData = userData.data;
+                        },
+                        function (error) {
+                            console.log(error);
+                        }
+                    );
+                },
+                function (error) {
+
+                })
+        }
+    };
 
     $scope.editProfile = function (userData) {
         var data = {};
@@ -62,7 +58,7 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
             }
         );
     };
-    
+
     $scope.approveFriendRequest = function (requestId, friendName) {
         userServices.approveFriendRequest(requestId)
             .then(
@@ -75,7 +71,11 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
                 $location.path('/user/home');
             },
             function error(error) {
-                console.log(error)
+                notify({
+                    message: 'Error during the operation. Please, logout, login and try again.',
+                    duration: 5000,
+                    position: 'center'
+                })
             }
         )
     };
@@ -92,7 +92,11 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
                 $location.path('/user/home');
             },
             function error(error) {
-                console.log(error)
+                notify({
+                    message: 'Error during the operation. Please, logout, login and try again.',
+                    duration: 5000,
+                    position: 'center'
+                });
             }
         )
     };
@@ -100,5 +104,7 @@ socialNetwork.controller('UserController', function ($scope, $rootScope, $locati
     $scope.findUsers = function (searchTerm) {
         return userServices.findUsers(searchTerm)
     };
+
+    $scope.userDataLoad();
 
 });

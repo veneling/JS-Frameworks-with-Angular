@@ -1,4 +1,4 @@
-<div ng-include="'partials/app-header.html'"></div>
+
 
 <div class="container" ng-controller="WallController">
 
@@ -9,46 +9,8 @@
         <div ng-include="'partials/user-header.html'"></div>
 
         <main class="padding-top">
-            <div class="well well-lg" ng-repeat="post in wallData">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#/users/{{post.author.username}}">
-                            <img class="media-object img-thumbnail" width="50" height="50"
-                                 ng-src="{{post.author.profileImageData}}"
-                                 alt="author image">
-                        </a>
-                    </div>
-
-                    <div class="media-body media-left">
-                        <h5 class="media-heading">
-                            <a href="#/users/{{post.author.username}}">{{post.author.name}}</a>
-                        </h5>
-                        <span>{{post.date | date:'dd.MM.yyyy hh:mm'}}</span>
-
-                        <p> {{post.postContent}}</p>
-                        <footer class="panel-footer">
-                            <p class="pull-left">likes: {{post.likesCount}}</p>
-
-                            <p class="pull-right">comments: {{post.totalCommentsCount}}</p>
-                        </footer>
-                    </div>
-                    <div class="col-lg-offset-1" ng-repeat="comment in post.comments">
-                        <div class="media-left">
-                            <a href="#/users/{{comment.author.username}}">
-                                <img class="media-object img-thumbnail" width="50" height="50"
-                                     ng-src="{{comment.author.profileImageData}}"
-                                     alt="author image">
-                            </a>
-                        </div>
-
-                        <div class="media-body media-left">
-                            <a href="#/users/{{comment.author.username}}" class="media-heading">{{comment.author.name}}</a>
-                            <span>{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
-
-                            <div> {{comment.commentContent}}</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="well" ng-repeat="post in wallData">
+                <div ng-include="'partials/post-content.html'"></div>
             </div>
 
             <div ng-show="loadingPosts">

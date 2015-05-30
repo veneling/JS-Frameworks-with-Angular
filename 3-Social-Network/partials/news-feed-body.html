@@ -1,0 +1,11 @@
+<div ng-controller="NewsFeedController">
+
+    <div class="well" ng-repeat="post in newsFeed">
+        <div ng-show="post.author.username != post.wallOwner.username">
+            <h4>{{post.author.name}} wrote to {{post.wallOwner.name}}</h4>
+        </div>
+        <div ng-include="'partials/post-content.html'"></div>
+    </div>
+
+</div>
+
