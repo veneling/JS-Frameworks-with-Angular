@@ -1,4 +1,6 @@
-socialNetwork.controller('NewsFeedController', function ($scope, $routeParams, $location, userServices, postServices) {
+socialNetwork.controller('NewsFeedController', function ($scope, $routeParams, $location, userServices, postServices, sharedService) {
+
+    sharedService.set('NewsFeedController', $scope);
 
     var startPost = '';
     $scope.newsFeed = [];

@@ -1,4 +1,4 @@
-socialNetwork.factory('postServices', function ($http, baseUrl) {
+socialNetwork.factory('postServices', function ($http, baseUrl ,userServices) {
 
     var serviceUrl = baseUrl + '/users';
 
@@ -7,16 +7,16 @@ socialNetwork.factory('postServices', function ($http, baseUrl) {
     service.likePost = function (postId) {
         return $http({
             method: 'POST',
-            url: baseUrl + '/Posts/' + postId + 'likes',
-            headers: this.getHeaders()
+            url: baseUrl + '/Posts/' + postId + '/likes',
+            headers: userServices.getHeaders()
         })
     };
 
     service.unlikePost = function (postId) {
         return $http({
             method: 'DELETE',
-            url: baseUrl + '/Posts/' + postId + 'likes',
-            headers: this.getHeaders()
+            url: baseUrl + '/Posts/' + postId + '/likes',
+            headers: userServices.getHeaders()
         })
     };
 

@@ -21,8 +21,8 @@
     <!-- begin displaying comments count and likes -->
     <footer class="panel-footer">
         <p class="pull-left" ng-controller="PostController">
-            <a href="" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike this post</a>
-            <a href="" ng-if="!post.liked" ng-click="likePost(post.id)">Like this post</a>
+            <a href="" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
+            <a href="" ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
         </p>
 
         <p class="pull-right">likes: {{post.likesCount}}</p>
