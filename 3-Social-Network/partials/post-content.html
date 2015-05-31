@@ -20,6 +20,11 @@
     <!-- end of displaying post content -->
     <!-- begin displaying comments count and likes -->
     <footer class="panel-footer">
+        <p class="pull-left" ng-controller="PostController">
+            <a href="" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike this post</a>
+            <a href="" ng-if="!post.liked" ng-click="likePost(post.id)">Like this post</a>
+        </p>
+
         <p class="pull-right">likes: {{post.likesCount}}</p>
 
         <p class="pull-right sn-padding-right-5" ng-if="post.totalCommentsCount > 3">
@@ -51,7 +56,7 @@
     <!-- end of comments display -->
 
     <div class="sn-panel-footer-no-border"
-         ng-if="(post.author.isFriend || post.author.username == userData.username) && post.wallOwner.isFriend">
+         ng-if="(post.author.isFriend || post.author.username == userData.username) && (post.wallOwner.isFriend || post.wallOwner.username == userData.username)">
         <form name="addCommentForm">
             <div class="form-group">
             <textarea class="form-control" ng-model="commentContent" placeholder="Enter your comment"

@@ -117,7 +117,7 @@ body {
     width: 64px;
     height: 64px;
     padding: 3px;
-    margin-left: 3px;
+    margin: 3px 0 3px 3px;
     line-height: 1.42857143;
     background-color: #fff;
     border: 1px solid #ddd;

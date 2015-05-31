@@ -1,23 +1,39 @@
-socialNetwork.controller('PostController', function ($scope, $rootScope, $location, $route, userServices, notify) {
+socialNetwork.controller('PostController', function ($scope, $rootScope, $location, $route, userServices) {
 
     $scope.addNewPost = function (postContent, username) {
 
 
         var user = username || $rootScope.userData.username;
-        console.log(user)
-        /*
+
         userServices.addNewPost(postContent, user)
             .then(
             function success() {
-                $location.path('/users/' + username);
+                $route.reload();
             },
             function error() {
 
             }
         )
-        */
     };
 
-    //console.log('current user is ' + $scope.currentUser.username);
-    //console.log('user data is ' + $scope.userData.username);
+    $scope.likePost = function (postId) {
+        postServices.likePost()
+            .then(function success(response) {
+                
+            },
+            function error(error) {
+
+            })
+    };
+
+    $scope.unlikePost = function (postId) {
+        postServices.unlikePost()
+            .then(function success(response) {
+
+            },
+            function error(error) {
+
+            })
+    }
+
 });

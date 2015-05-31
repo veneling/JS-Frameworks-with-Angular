@@ -15,7 +15,6 @@ socialNetwork.controller('FriendFriendsController', function ($scope, $rootScope
                 $scope.friendsListCount = friendsArray.length;
             },
             function error(error) {
-                console.log(error);
                 
             })
     };

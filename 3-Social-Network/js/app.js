@@ -2,15 +2,21 @@ var socialNetwork = angular.module('socialNetwork', ['ngRoute', 'cgNotify', 'nai
 
 socialNetwork.constant('baseUrl','http://softuni-social-network.azurewebsites.net/api');
 
+socialNetwork.run(function ($rootScope) {
+    $rootScope.$on('scope.set', function (event, data) {
+        console.log("scope.set", data);
+    });
+});
+
 socialNetwork.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/welcome.html',
+                templateUrl: 'partials/not-logged/welcome.html',
                 controller: 'BaseController'
             })
             .when('/logout', {
-                templateUrl: 'partials/welcome.html',
+                templateUrl: 'partials/not-logged/welcome.html',
                 controller: 'BaseController'
             })
             .when('/user/home', {
