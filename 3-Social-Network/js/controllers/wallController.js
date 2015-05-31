@@ -1,4 +1,6 @@
-socialNetwork.controller('WallController', function ($scope, $routeParams,$rootScope, $location, userServices) {
+socialNetwork.controller('WallController', function ($scope, $routeParams,$rootScope, $location, userServices, sharedService) {
+
+    sharedService.set('WallController', $scope);
 
     var startPost = '';
     var username = $routeParams.username;

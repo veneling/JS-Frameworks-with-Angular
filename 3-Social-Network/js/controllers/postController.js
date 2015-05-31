@@ -4,12 +4,20 @@ socialNetwork.controller('PostController', function ($scope, $rootScope, $route,
 
     $scope.addNewPost = function (postContent, username) {
 
+        if (username == undefined) {
+            var scopeNewsFeedController = sharedService.get('NewsFeedController', $scope.newsFeed);
+            target = scopeNewsFeedController.newsFeed;
+        } else {
+            var scopeWallController = sharedService.get('WallController', $scope.wallData);
+            target = scopeWallController.wallData;
+        }
+
         var user = username || $rootScope.userData.username;
 
-        userServices.addNewPost(postContent, user)
+        postServices.addNewPost(postContent, user)
             .then(
-            function success() {
-                $route.reload();
+            function success(response) {
+                target.unshift(response.data);
             },
             function error() {
 
@@ -18,33 +26,42 @@ socialNetwork.controller('PostController', function ($scope, $rootScope, $route,
     };
 
     $scope.likePost = function (postId) {
-        var scopeNewsFeedController = sharedService.get('NewsFeedController', $scope.newsFeed);
-        var newsFeed = scopeNewsFeedController.newsFeed;
-
-        console.log(postId)
-        console.log(newsFeed)
+        var target;
+        if (sharedService.get('NewsFeedController', $scope.newsFeed) == undefined) {
+            var scopeWallController = sharedService.get('WallController', $scope.wallData);
+            target = scopeWallController.wallData;
+        } else {
+            var scopeNewsFeedController = sharedService.get('NewsFeedController', $scope.newsFeed);
+            target = scopeNewsFeedController.newsFeed;
+        }
 
         postServices.likePost(postId)
             .then(function success(response) {
-                var id = findPostById(postId, newsFeed);
-                newsFeed[id].liked = true;
-                newsFeed[id].likesCount++;
+                var id = findPostById(postId, target);
+                target[id].liked = true;
+                target[id].likesCount++;
             },
             function error(error) {
 
             })
-
     };
 
     $scope.unlikePost = function (postId) {
-        var scopeNewsFeedController = sharedService.get('NewsFeedController', $scope.newsFeed);
-        var newsFeed = scopeNewsFeedController.newsFeed;
+        var target;
+        if (sharedService.get('NewsFeedController', $scope.newsFeed) != undefined) {
+            var scopeNewsFeedController = sharedService.get('NewsFeedController', $scope.newsFeed);
+            target = scopeNewsFeedController.newsFeed;
+        } else {
+            var scopeWallController = sharedService.get('WallController', $scope.wallData);
+            target = scopeWallController.wallData;
+        }
 
         postServices.unlikePost(postId)
             .then(function success(response) {
-                var id = findPostById(postId, newsFeed);
-                newsFeed[id].liked = true;
-                newsFeed[id].likesCount--;
+                console.log(response)
+                var id = findPostById(postId, target);
+                target[id].liked = false;
+                target[id].likesCount--;
             },
             function error(error) {
 

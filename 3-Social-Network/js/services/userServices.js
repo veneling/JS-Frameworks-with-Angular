@@ -129,18 +129,6 @@ socialNetwork.factory('userServices', function ($http, baseUrl) {
         })
     };
 
-    service.addNewPost = function (postContent, username) {
-        return $http({
-            method: 'POST',
-            url: baseUrl + '/posts',
-            data : {
-                postContent : postContent,
-                username : username
-            },
-            headers: this.getHeaders()
-        })
-    };
-
     service.addNewComment = function (postId, commentContent) {
         return $http({
             method: 'POST',

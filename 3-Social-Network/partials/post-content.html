@@ -19,7 +19,7 @@
     </div>
     <!-- end of displaying post content -->
     <!-- begin displaying comments count and likes -->
-    <footer class="panel-footer">
+    <footer class="panel-footer" ng-if="(post.author.isFriend || post.author.username == userData.username) && (post.wallOwner.isFriend || post.wallOwner.username == userData.username)">
         <p class="pull-left" ng-controller="PostController">
             <a href="" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
             <a href="" ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <!-- end of comments display -->
-
+    <!-- begin adding comment area and button -->
     <div class="sn-panel-footer-no-border"
          ng-if="(post.author.isFriend || post.author.username == userData.username) && (post.wallOwner.isFriend || post.wallOwner.username == userData.username)">
         <form name="addCommentForm">
@@ -66,6 +66,6 @@
                     ng-click="addNewComment(post.id, commentContent)" ng-disabled="addCommentForm.$invalid">Comment
             </button>
         </form>
-
+        <!-- end of adding comment area and button -->
     </div>
 </div>
