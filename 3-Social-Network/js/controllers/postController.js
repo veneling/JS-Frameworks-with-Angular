@@ -38,6 +38,7 @@ socialNetwork.controller('PostController', function ($scope, $rootScope, $route,
         postServices.likePost(postId)
             .then(function success(response) {
                 var id = findPostById(postId, target);
+                console.log(id);
                 target[id].liked = true;
                 target[id].likesCount++;
             },
@@ -58,8 +59,8 @@ socialNetwork.controller('PostController', function ($scope, $rootScope, $route,
 
         postServices.unlikePost(postId)
             .then(function success(response) {
-                console.log(response)
                 var id = findPostById(postId, target);
+                console.log(id);
                 target[id].liked = false;
                 target[id].likesCount--;
             },
