@@ -15,21 +15,25 @@
         </main>
     </div>
 
-    <div class="col-lg-3 sn-padding-top-190" ng-if="userHeader.isFriend">
-        <div class="well">
-            <form name="addPostForm">
-                <div class="form-group">
-            <textarea class="form-control" ng-model="postContent" placeholder="Say something to {{userHeader.name}}"
-                      rows="3" required></textarea>
-                </div>
-                <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid" ng-controller="PostController"
-                        ng-click="addNewPost(postContent, userHeader.username)">Say it now
-                </button>
-            </form>
-        </div>
-    </div>
+    <div class="sn-padding-top-190 col-lg-3">
 
-    <div ng-include="'partials/user-6-friends.html'"></div>
+        <div ng-if="currentUser.isFriend">
+            <div class="well">
+                <form name="addPostForm">
+                    <div class="form-group">
+            <textarea class="form-control" ng-model="postContent" placeholder="Say something to {{currentUser.name}}"
+                      rows="2" required></textarea>
+                    </div>
+                    <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid"
+                            ng-controller="PostController"
+                            ng-click="addNewPost(postContent, currentUser.username)">Say it now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div ng-if="currentUser.isFriend" ng-include="'partials/view-friends/logged-user-6-friends.html'"></div>
+    </div>
 
 </div>
 

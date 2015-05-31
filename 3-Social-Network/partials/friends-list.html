@@ -1,0 +1,13 @@
+<div class="sn-well col-lg-1" ng-repeat="friend in friendsList | filter:userQuery">
+    <div class="media-body text-center">
+        <a href="#/users/{{friend.username}}">
+            <img ng-src="{{friend.profileImageData}}" class="sn-avatar center-block"/>
+        </a>
+    </div>
+
+
+    <h5 class="text-center">
+        <a href="#/users/{{friend.username}}">{{friend.name}}</a>
+    </h5>
+
+</div>

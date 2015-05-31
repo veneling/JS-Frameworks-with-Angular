@@ -1,18 +1,22 @@
-socialNetwork.controller('FriendsController', function ($scope, $routeParams, $location, userServices, notify) {
+socialNetwork.controller('FriendsController', function ($scope, $rootScope, $routeParams, $location, userServices, notify) {
 
     $scope.getOwnFriends = function () {
+
         userServices.getOwnFriends()
             .then(function success(response) {
-                for(var i = 0; i < response.data.friends.length; i++){
-                    if(response.data.friends[i].profileImageData == null) {
-                        response.data.friends[i].profileImageData = userServices.getDefaultProfileImage();
+                var friendsArray =  response.data.friends;
+                for (var i = 0; i < friendsArray.length; i++) {
+                    if (friendsArray[i].profileImageData == null) {
+                        friendsArray[i].profileImageData = userServices.getDefaultProfileImage();
                     }
                 }
-                $scope.friendsList = response.data.friends;
-                $scope.friendsListCount = response.data.totalCount;
+                $scope.friendsList = friendsArray;
+                $scope.friendsListCount = friendsArray.length;
             },
             function error(error) {
-                if(error.data.message = 'Session token expired or not valid.') {
+                console.log(error);
+
+                if (error.data.message = 'Session token expired or not valid.') {
                     notify({
                         message: error.data.message,
                         duration: 5000,
@@ -27,6 +31,28 @@ socialNetwork.controller('FriendsController', function ($scope, $routeParams, $l
                     $location.path('/');
                 }
             })
+    };
+
+    $scope.sendFriendRequest = function () {
+        userServices.sendFriendRequest($routeParams.username)
+            .then(
+            function success(response) {
+                notify({
+                    message: 'Request for friendship successfully sent',
+                    duration: 5000,
+                    position: 'center'
+                });
+            },
+            function error(error) {
+                if (error.data.message == 'A pending request already exists.') {
+                    notify({
+                        message: 'You have pending request to this user which he/she still hasn\'t reviewed.',
+                        duration: 5000,
+                        position: 'center'
+                    });
+                }
+            }
+        )
     };
 
     $scope.getOwnFriends();

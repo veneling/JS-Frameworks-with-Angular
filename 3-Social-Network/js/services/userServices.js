@@ -102,10 +102,18 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
         })
     };
 
-    service.getOwnFriends = function (requestId) {
+    service.getOwnFriends = function () {
         return $http({
             method: 'GET',
             url: baseUrl + '/me/friends/preview',
+            headers: this.getHeaders()
+        })
+    };
+
+    service.getFriendFriends = function (username) {
+        return $http({
+            method: 'GET',
+            url: serviceUrl + '/' + username + '/friends',
             headers: this.getHeaders()
         })
     };
@@ -129,6 +137,25 @@ socialNetwork.factory('userServices', function ($http, baseUrl, notify) {
                 postContent : postContent,
                 username : username
             },
+            headers: this.getHeaders()
+        })
+    };
+
+    service.addNewComment = function (postId, commentContent) {
+        return $http({
+            method: 'POST',
+            url: baseUrl + '/posts/' + postId + '/comments',
+            data : {
+                commentContent : commentContent
+            },
+            headers: this.getHeaders()
+        })
+    };
+
+    service.showAllComments = function (postId) {
+        return $http({
+            method: 'GET',
+            url: baseUrl + '/posts/' + postId + '/comments',
             headers: this.getHeaders()
         })
     };

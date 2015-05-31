@@ -29,8 +29,12 @@ socialNetwork.config(['$routeProvider',
                 templateUrl: 'partials/user-wall.html',
                 controller: 'BaseController'
             })
-            .when('/all-friends', {
-                templateUrl: 'partials/user-all-friends.html',
+            .when('/users/:username/friends', {
+                templateUrl: 'partials/view-friends/logged-user-all-friends.html',
+                controller: 'BaseController'
+            })
+            .when('/me/friends/preview', {
+                templateUrl: 'partials/view-friends/user-all-friends.html',
                 controller: 'BaseController'
             })
             .otherwise({

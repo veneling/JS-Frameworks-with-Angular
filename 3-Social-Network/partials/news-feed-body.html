@@ -2,7 +2,8 @@
 
     <div class="well" ng-repeat="post in newsFeed">
         <div ng-show="post.author.username != post.wallOwner.username">
-            <h4>{{post.author.name}} wrote to {{post.wallOwner.name}}</h4>
+            <h4><a href="#/users/{{post.author.username}}">{{post.author.name}}</a> wrote to <a
+                    href="#/users/{{post.wallOwner.username}}">{{post.wallOwner.name}}</a></h4>
         </div>
         <div ng-include="'partials/post-content.html'"></div>
     </div>

@@ -1,7 +1,7 @@
 <div class="well">
     <form name="addPostForm">
         <div class="form-group">
-            <textarea class="form-control" ng-model="postContent" placeholder="Say something to the world"
+            <textarea class="form-control" ng-model="postContent" placeholder="Say something to your friends"
                       rows="3" required></textarea>
         </div>
         <button class="btn btn-md btn-primary" ng-disabled="addPostForm.$invalid" ng-controller="PostController"
@@ -10,4 +10,4 @@
     </form>
 </div>
 
-<div ng-include="'partials/user-6-friends.html'"></div>
+<div ng-include="'partials/view-friends/user-6-friends.html'"></div>

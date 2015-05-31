@@ -1,4 +1,4 @@
-socialNetwork.controller('WallController', function ($scope, $routeParams, $location, userServices, notify) {
+socialNetwork.controller('WallController', function ($scope, $routeParams, $location, userServices, auxiliaryServices) {
 
     var startPost = '';
     var username = $routeParams.username;
@@ -12,6 +12,14 @@ socialNetwork.controller('WallController', function ($scope, $routeParams, $loca
             function success(response) {
                 $scope.loadingPosts = false;
                 if (response.data.length > 0) {
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        response.data[i].date = auxiliaryServices.convertDate(response.data[i].date);
+                        for (var j = 0; j < response.data[i].comments.length; j++) {
+                            response.data[i].comments[j].date = auxiliaryServices.convertDate(response.data[i].comments[j].date);
+                        }
+                    }
+
                     $scope.wallData = $scope.wallData.concat(response.data);
                     startPost = response.data[response.data.length - 1].id;
                 } else {
@@ -23,7 +31,7 @@ socialNetwork.controller('WallController', function ($scope, $routeParams, $loca
             }
         )
     };
-    
+
     if (username) {
         $scope.getUserWall();
         $(window).scroll(function () {

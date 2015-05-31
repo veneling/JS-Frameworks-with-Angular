@@ -19,10 +19,16 @@
     </div>
     <!-- end of displaying post content -->
     <!-- begin displaying comments count and likes -->
-        <footer class="panel-footer">
-            <p class="pull-right">likes: {{post.likesCount}}</p>
-            <p class="pull-right sn-padding-right-5">comments: {{post.totalCommentsCount}}</p>
-        </footer>
+    <footer class="panel-footer">
+        <p class="pull-right">likes: {{post.likesCount}}</p>
+
+        <p class="pull-right sn-padding-right-5" ng-if="post.totalCommentsCount > 3">
+            <a href="" ng-controller="CommentsController" ng-click="showAllComments(post.id)"> show all</a>
+        </p>
+
+        <p class="pull-right sn-padding-right-5">comments: {{post.totalCommentsCount}}</p>
+
+    </footer>
     <!-- end of displaying comments count and likes -->
 
     <!-- begin displaying post's comments -->
@@ -37,21 +43,24 @@
 
         <div class="media-body media-left">
             <a href="#/users/{{comment.author.username}}" class="media-heading">{{comment.author.name}}</a>
-            <span>{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
+            <span date-converter>{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
 
             <div> {{comment.commentContent}}</div>
         </div>
     </div>
     <!-- end of comments display -->
 
-    <div class="sn-panel-footer-no-border">
+    <div class="sn-panel-footer-no-border"
+         ng-if="(post.author.isFriend || post.author.username == userData.username) && post.wallOwner.isFriend">
         <form name="addCommentForm">
             <div class="form-group">
-            <textarea class="form-control" ng-model="addComment" placeholder="Enter your comment"
-                      rows="3" required></textarea>
+            <textarea class="form-control" ng-model="commentContent" placeholder="Enter your comment"
+                      rows="2" required></textarea>
             </div>
-            <button class="btn btn-md btn-primary" ng-disabled="addCommentForm.$invalid">Comment</button>
+            <button class="btn btn-md btn-primary" ng-controller="CommentsController"
+                    ng-click="addNewComment(post.id, commentContent)" ng-disabled="addCommentForm.$invalid">Comment
+            </button>
         </form>
-        
+
     </div>
 </div>

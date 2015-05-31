@@ -1,4 +1,4 @@
-socialNetwork.controller('NewsFeedController', function ($scope, $routeParams, $location, userServices) {
+socialNetwork.controller('NewsFeedController', function ($scope, $routeParams, $location, userServices, auxiliaryServices) {
 
     var startPost = '';
     $scope.newsFeed = [];
@@ -8,8 +8,17 @@ socialNetwork.controller('NewsFeedController', function ($scope, $routeParams, $
     $scope.getMyNewsFeed = function () {
         userServices.getMyNewsFeed(startPost, null)
             .then(function success(response) {
+
                 $scope.loadingPosts = false;
                 if (response.data.length > 0) {
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        response.data[i].date = auxiliaryServices.convertDate(response.data[i].date);
+                        for (var j = 0; j < response.data[i].comments.length; j++) {
+                            response.data[i].comments[j].date = auxiliaryServices.convertDate(response.data[i].comments[j].date);
+                        }
+                    }
+
                     $scope.newsFeed = $scope.newsFeed.concat(response.data);
                     startPost = response.data[response.data.length - 1].id;
                 } else {
